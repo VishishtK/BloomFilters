@@ -11,13 +11,13 @@ public class BloomFilter {
         bitmap = new Integer[numberOfBits];
     }
 
-    private void encode(int element){
+    void encode(int element){
         for(int i=0;i<numberOfHashes;i++){
             bitmap[hashFunctions.Hash(element, i)] = 1;
         }
     }
 
-    private boolean lookUp(int element){
+    boolean lookUp(int element){
         for(int i=0;i<numberOfHashes;i++){
             if((bitmap[hashFunctions.Hash(element, i)] == null) || bitmap[hashFunctions.Hash(element, i)] != 1){
                 return false;
