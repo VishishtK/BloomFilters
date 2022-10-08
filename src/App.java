@@ -27,5 +27,22 @@ public class App {
         countingBloomFilter.Remove(Arrays.stream(randomSetA).limit(NumberOfElementsToDelete).toArray());
         countingBloomFilter.ConsumeElements(setToAdd);
         countingBloomFilter.Output("CountingBloomFilter.txt", randomSetA);
+
+
+        System.out.println("\nTesting CodedBloomFilter");
+        int NumberOfSets = 7;
+        int NumberOfElementsPerSet = 1000;
+        int NumberOfFilters = 3;
+        int NumberOfBitsInEachFilter = 30000;
+        NumberOfHashes = 7;
+        int[][] sets = new int[NumberOfSets][NumberOfElementsPerSet];
+
+        CodedBloomFilter codedBloomFilter = new CodedBloomFilter(NumberOfFilters, NumberOfBitsInEachFilter, NumberOfHashes);
+        for(int i=0;i<NumberOfSets;i++){
+            sets[i] = IntStream.generate(() -> new Random().nextInt()).distinct().limit(NumberOfElementsPerSet).map(element -> Math.abs(element)).toArray();
+        }
+
+        codedBloomFilter.ConsumeElements(sets);
+        codedBloomFilter.Output(sets);
     }
 }

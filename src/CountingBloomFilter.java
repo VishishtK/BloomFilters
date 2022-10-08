@@ -6,7 +6,7 @@ public class CountingBloomFilter extends BloomFilter{
     }
 
     @Override
-    void encode(int element){
+    public void encode(int element){
         for(int i=0;i<numberOfHashes;i++){
             if(bitmap[hashFunctions.Hash(element, i)]==null){
                 bitmap[hashFunctions.Hash(element, i)] = 1;
