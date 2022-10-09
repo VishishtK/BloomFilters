@@ -1,8 +1,12 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 public class CodedBloomFilter{
     int numberOfFilters;
     int numberOfBits;
     int numberOfHashes;
     BloomFilter[] bloomFilters;
+    String outputFileName = "CodedBloomFilter.txt";
 
     public CodedBloomFilter(int numberOfFilters, int numberOfBits, int numberOfHashes){
         this.numberOfBits = numberOfBits;
@@ -52,8 +56,15 @@ public class CodedBloomFilter{
             }
         }
 
-        System.out.println("Correct Lookups: " + correctResults);
-
+        String output = "Correct Lookups: " + correctResults;
+        try{
+            System.out.println(output);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
+            writer.write(output);
+            writer.close();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
 
 }

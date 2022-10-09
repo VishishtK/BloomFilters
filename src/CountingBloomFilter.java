@@ -1,4 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 public class CountingBloomFilter extends BloomFilter{
+
+    String outputFileName = "CountingBloomFilter.txt";
 
     public CountingBloomFilter(int numberOfBits, int numberOfHashes) {
         super(numberOfBits, numberOfHashes);
@@ -35,7 +40,15 @@ public class CountingBloomFilter extends BloomFilter{
                 elementsFoundOfSetA++;
             }
         }
-        System.out.println("Number of elements of set A found in filter: " + elementsFoundOfSetA);
+        String output = "Number of elements of set A found in filter: " + elementsFoundOfSetA;
+        try{
+            System.out.println(output);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
+            writer.write(output);
+            writer.close();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
     
 }

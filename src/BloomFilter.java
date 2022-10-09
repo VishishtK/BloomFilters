@@ -1,8 +1,12 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 public class BloomFilter {
     Integer[] bitmap;
     int numberOfBits;
     int numberOfHashes;
     HashFunctions hashFunctions;
+    String outputFileName = "BloomFilter.txt";
 
     public BloomFilter(int numberOfBits, int numberOfHashes){
         this.numberOfBits = numberOfBits;
@@ -33,23 +37,33 @@ public class BloomFilter {
     }
 
     public void Output(String outputFileName, int[] randomSetA, int[] randomSetB) {
-        System.out.println("A)");
+        String output = "";
+        output += "1) ";
         int elementsFoundOfSetA = 0;
         for(int i=0;i<randomSetA.length;i++){
             if(lookUp(randomSetA[i])){
                 elementsFoundOfSetA++;
             }
         }
-        System.out.println("Number of elements of set A found in filter: " + elementsFoundOfSetA);
+        output += "Number of elements of set A found in filter: " + elementsFoundOfSetA + "\n";
 
-        System.out.println("B)");
+        output += "2) ";
         int elementsFoundOfSetB = 0;
         for(int i=0;i<randomSetB.length;i++){
             if(lookUp(randomSetB[i])){
                 elementsFoundOfSetB++;
             }
         }
-        System.out.println("Number of elements of set B found in filter: " + elementsFoundOfSetB);
+        output += "Number of elements of set B found in filter: " + elementsFoundOfSetB + "\n";
+
+        try{
+            System.out.println(output);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
+            writer.write(output);
+            writer.close();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
 
 }

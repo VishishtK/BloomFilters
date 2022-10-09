@@ -5,13 +5,13 @@ import java.util.stream.IntStream;
 public class App {
     public static void main(String[] args) throws Exception {
         int NumberOfElements = 1000;
-        int NumberOfBits = 1000;
+        int NumberOfBits = 10000;
         int NumberOfHashes = 3;
 
         int[] randomSetA = IntStream.generate(() -> new Random().nextInt()).limit(NumberOfElements).map(element -> Math.abs(element)).toArray();
         int[] randomSetB = IntStream.generate(() -> new Random().nextInt()).limit(NumberOfElements).map(element -> Math.abs(element)).toArray();
 
-        System.out.println("Testing BloomFilter");
+        System.out.println("\nTesting BloomFilter");
         BloomFilter bloomFilter = new BloomFilter(NumberOfBits, NumberOfHashes);
         bloomFilter.ConsumeElements(randomSetA);
         bloomFilter.Output("BloomFilter.txt",randomSetA,randomSetB);
